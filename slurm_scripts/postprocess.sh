@@ -11,5 +11,6 @@ while getopts ":r:" opt; do
   esac
 done
 
+module load anaconda
 
 python process_crop_results.py --watershedListFile data/watershed_names.txt --resultsPath /project/nssac_agaid/vic_cropsyst/test_results/w4_aug_22/run${runId}/ --outPath /project/nssac_agaid/vic_cropsyst/test_results/w4_aug_22/aggregate/run${runId}

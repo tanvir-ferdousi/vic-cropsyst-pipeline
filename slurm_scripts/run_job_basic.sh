@@ -7,4 +7,6 @@
 
 echo Running on `hostname`
 
+module load anaconda
+
 python ../main/sim_run/sim_runner_basic.py
