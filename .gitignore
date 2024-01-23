@@ -1,0 +1,10 @@
+Database/
+log/
+.DS_Store
+SoilSplits/*/segment_*
+SimSplits/*/vic_control_*
+.ipynb_checkpoints/
+__pycache__
+.virtual_documents/
+.mypy_cache/
+exports/
