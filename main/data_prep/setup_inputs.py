@@ -1,13 +1,10 @@
 from pathlib import Path
 from sys import exit
-import subprocess
-from sys import exit
 import os, shutil
-from datetime import datetime
 import geopandas as gpd
 import argparse
 
-from lib.dataprocessing import getMultiWsCoords, readFile
+from lib.dataprocessing import readFile
 
 def readClas():
     """
@@ -17,11 +14,8 @@ def readClas():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--splitSize', type=int, dest='splitSize', required=False, default=5)
-    parser.add_argument('--runId', type=int, dest='runId', required=True)
-    # parser.add_argument('--targetWatershed', type=str, dest='targetWatershed', required=True)
-    # parser.add_argument('--watershedListFile', type=str, dest='watershedListFile', required=True)
+    parser.add_argument('--runId', type=int, dest='runId', required=False)
     parser.add_argument('--coordListFile', type=str, dest='coordListFile', required=True)
-    # parser.add_argument('--resultDirPrefix', type=str, dest='resultDirPrefix', required=True)
     parser.add_argument('--resultDir', type=str, dest='resultDir', required=True)
 
 
@@ -246,21 +240,22 @@ def main():
     coord_list_file = args.coordListFile
     result_dir = args.resultDir
 
-    run_id = args.runId
+    # run_id = args.runId
 
     print(f'Split size: {split_size}')
-    print(f'Run id: {run_id}')
+    # print(f'Run id: {run_id}')
 
-    forcing_list_path = 'data/forcing_file_list.txt'
+    forcing_list_path = '../../input_files/static/forcing_file_list.txt'
     # watershed_data_file = 'data/VIC_gridcode_latlong_area_watershed.csv'
 
     soil_file_in = '/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC-CropSyst/Simulation/Database/Soil/all_calibrated_plus_uncalibrated_soil_210106.txt'
-    soil_dir_out = 'SoilSplits/' + 'run' + str(run_id) + '/'
+    soil_dir_out = '../../input_files/dynamic/basic_run/SoilSplits'
 
-    control_file_in = 'vic_control.txt'
-    control_dir_out = 'SimSplits/' + 'run' + str(run_id) + '/'
+    control_file_in = '../../input_files/static/vic_control.txt'
+    control_dir_out = '../../input_files/dynamic/basic_run/SimSplits'
 
-    forcing_dir = '/scratch/jcr5wj/agaid/forcing/input_data_mod/' + 'run' + str(run_id) + '/data_'
+    # forcing_dir = '/scratch/jcr5wj/agaid/forcing/input_data_mod/' + 'run' + str(run_id) + '/data_'
+    forcing_dir = '/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC_Binary_CONUS_1979_to_2019_20200721/data_'
 
     # watershed_list = readFile(watershed_list_file)
     # target_coords = getMultiWsCoords(watershed_data_file, watershed_list)

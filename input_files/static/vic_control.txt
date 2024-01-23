@@ -65,7 +65,7 @@ ALMA_INPUT	FALSE					# TRUE = ALMA-compliant input variable units; FALSE = stand
 #######################################################################
 # Land Surface Files and Parameters
 #######################################################################
-SOIL			/scratch/jcr5wj/agaid/hydro-sim/<REPLACE_SOILFILE>          #/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC-CropSyst/Simulation/
+SOIL			/scratch/jcr5wj/agaid/vic-cropsyst-pipeline/<REPLACE_SOILFILE>          #/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC-CropSyst/Simulation/
 ARC_SOIL			FALSE   					      # TRUE = read soil parameters from ARC\INFO ASCII grids
 #SOIL_DIR			(soil param directory)   	    # Directory containing ARC\INFO ASCII grids of soil parameters - only valid if ARC_SOIL is TRUE
 BASEFLOW			ARNO						       # ARNO = columns 5-8 are the standard VIC baseflow parameters; NIJSSEN2001 = columns 5-8 of soil file are baseflow parameters from Nijssen et al (2001)
