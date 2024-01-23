@@ -1,5 +1,4 @@
 import subprocess
-import time
 from pathlib import Path
 import os, shutil
 from lib.dataprocessing import readFile
