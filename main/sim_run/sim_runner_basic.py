@@ -1,7 +1,9 @@
 import subprocess
 from pathlib import Path
 import os, shutil
-from lib.dataprocessing import readFile
+
+from .context import lib
+# from lib.dataprocessing import readFile
 
 SLEEP_TIME_SECONDS = 100
 WORK_DIR = '/scratch/jcr5wj/agaid/vic-cropsyst-pipeline/'
@@ -70,7 +72,7 @@ def main():
     coord_list_file = '../input_files/static/coord_list_small_test.txt'
     split_size = 5
 
-    target_coords = readFile(coord_list_file)
+    target_coords = lib.readFile(coord_list_file)
     n_segments = len(range(0, len(target_coords), split_size))
 
     run_hydro_sim(coord_list_file, split_size, n_segments)
