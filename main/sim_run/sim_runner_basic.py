@@ -47,23 +47,23 @@ def run_hydro_sim(coord_list_file, split_size, n_segments):
     status = subprocess.run(['python', python_script, '--coordListFile', coord_list_file, '--splitSize', str(split_size), '--resultDir', RESULT_DIR_PREFIX], stdout=subprocess.PIPE).stdout.decode("utf-8")
     print("Setup input stdout: " + status)
 
-    # submit job
-    print("Submitting job")
-    arry_arg = '--array=0-' + str(n_segments-1)
-    slurm_script = WORK_DIR + 'slurm_scripts/vic_job_basic.sh'
-    status = subprocess.run(['sbatch', arry_arg, slurm_script], stdout=subprocess.PIPE).stdout.decode("utf-8")
-    ACTIVE_JOB_ID_LIST.append(status.split()[-1])
-
-    # wait for finish
-    print("Checking for job status")
-    status = subprocess.run(['squeue', '-u', 'jcr5wj'], stdout=subprocess.PIPE).stdout.decode("utf-8")
-    while any(job_id in status for job_id in ACTIVE_JOB_ID_LIST):
-        print("Waiting for " + str(SLEEP_TIME_SECONDS) + " seconds.")
-        time.sleep(SLEEP_TIME_SECONDS)
-        status = subprocess.run(['squeue', '-u', 'jcr5wj'], stdout=subprocess.PIPE).stdout.decode("utf-8")
-        print("status: " + status)
-
-    print("All jobs finished")
+    # # submit job
+    # print("Submitting job")
+    # arry_arg = '--array=0-' + str(n_segments-1)
+    # slurm_script = WORK_DIR + 'slurm_scripts/vic_job_basic.sh'
+    # status = subprocess.run(['sbatch', arry_arg, slurm_script], stdout=subprocess.PIPE).stdout.decode("utf-8")
+    # ACTIVE_JOB_ID_LIST.append(status.split()[-1])
+    #
+    # # wait for finish
+    # print("Checking for job status")
+    # status = subprocess.run(['squeue', '-u', 'jcr5wj'], stdout=subprocess.PIPE).stdout.decode("utf-8")
+    # while any(job_id in status for job_id in ACTIVE_JOB_ID_LIST):
+    #     print("Waiting for " + str(SLEEP_TIME_SECONDS) + " seconds.")
+    #     time.sleep(SLEEP_TIME_SECONDS)
+    #     status = subprocess.run(['squeue', '-u', 'jcr5wj'], stdout=subprocess.PIPE).stdout.decode("utf-8")
+    #     print("status: " + status)
+    #
+    # print("All jobs finished")
 
 
 def main():
