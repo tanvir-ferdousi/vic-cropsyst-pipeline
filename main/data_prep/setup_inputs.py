@@ -1,11 +1,14 @@
 from pathlib import Path
 from sys import exit
-import os, shutil
+import os, shutil, sys, inspect
 import geopandas as gpd
 import argparse
 
-from .context import lib
-# from lib.dataprocessing import readFile
+cur_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+par_dir = os.path.dirname(cur_dir)
+sys.path.insert(0, par_dir)
+
+from lib.dataprocessing import readFile
 
 def readClas():
     """
@@ -188,7 +191,7 @@ def getCoordinatesFromForcingFiles(file_names, file_prefix, file_suffix):
     return coord
 
 def getForcingCoords(forcing_list_path):
-    forcing_file_names = lib.readFile(forcing_list_path)
+    forcing_file_names = readFile(forcing_list_path)
     forcing_coords = getCoordinatesFromForcingFiles(forcing_file_names, 'data_', '')
     return forcing_coords
 
@@ -217,7 +220,7 @@ def prepare_input_data(target_coords, forcing_coords, split_size, soil_file_in, 
     print('Write sub-soil files')
     n_segments = writeSubSoilFiles(soil_path_prefix, filtered_soil_data, split_size)
 
-    control_data = lib.readFile(control_file_in)
+    control_data = readFile(control_file_in)
 
     old_txt = '<REPLACE_RESULTS_PATH>'
     new_txt = result_dir
@@ -260,7 +263,7 @@ def main():
 
     # watershed_list = readFile(watershed_list_file)
     # target_coords = getMultiWsCoords(watershed_data_file, watershed_list)
-    target_coords = lib.readFile(coord_list_file)
+    target_coords = readFile(coord_list_file)
     forcing_coords = getForcingCoords(forcing_list_path)
 
     prepare_input_data(target_coords, forcing_coords, split_size, soil_file_in, soil_dir_out, control_file_in, control_dir_out, forcing_dir, result_dir)

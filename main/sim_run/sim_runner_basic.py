@@ -1,9 +1,12 @@
 import subprocess
 from pathlib import Path
-import os, shutil
+import os, sys, shutil, inspect
 
-from .context import lib
-# from lib.dataprocessing import readFile
+# from .context import lib
+cur_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+par_dir = os.path.dirname(cur_dir)
+sys.path.insert(0, par_dir)
+from lib.dataprocessing import readFile
 
 SLEEP_TIME_SECONDS = 100
 WORK_DIR = '/scratch/jcr5wj/agaid/vic-cropsyst-pipeline/'
@@ -37,7 +40,7 @@ def clearDir(dir_path):
 
 def run_hydro_sim(coord_list_file, split_size, n_segments):
 
-    ACTIVE_JOB_ID_LIST = []
+    # ACTIVE_JOB_ID_LIST = []
 
 
     # result_dir = RESULT_DIR_PREFIX
@@ -72,7 +75,7 @@ def main():
     coord_list_file = '../input_files/static/coord_list_small_test.txt'
     split_size = 5
 
-    target_coords = lib.readFile(coord_list_file)
+    target_coords = readFile(coord_list_file)
     n_segments = len(range(0, len(target_coords), split_size))
 
     run_hydro_sim(coord_list_file, split_size, n_segments)
