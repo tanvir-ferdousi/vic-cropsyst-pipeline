@@ -210,7 +210,7 @@ def prepare_input_data(target_coords, forcing_coords, split_size, soil_file_in, 
 
     # read soil file
     print('Read soil files')
-    soil_data = lib.readFile(soil_file_in)
+    soil_data = readFile(soil_file_in)
     soil_coord = getSoilCoords(soil_data)
 
     common_grids = list(set(target_coords) & set(soil_coord) & set(forcing_coords))
@@ -245,9 +245,11 @@ def main():
     result_dir = args.resultDir
 
     # run_id = args.runId
+    print(f'In setup_inputs.py. CWD: {os.getcwd()}')
 
     print(f'Split size: {split_size}')
     # print(f'Run id: {run_id}')
+    print
 
     forcing_list_path = '../../input_files/static/forcing_file_list.txt'
     # watershed_data_file = 'data/VIC_gridcode_latlong_area_watershed.csv'

@@ -5,7 +5,7 @@ from tqdm import tqdm
 import os, shutil
 from pathlib import Path
 import argparse
-from lib.dataprocessing import getMultiWsCoords, readFile
+from lib.dataprocessing import readFile
 
 def readClas():
     """

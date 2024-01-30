@@ -44,6 +44,7 @@ def run_hydro_sim(coord_list_file, split_size, n_segments):
 
 
     # result_dir = RESULT_DIR_PREFIX
+    print(f'In sim_runner_basic.py. CWD: {os.getcwd()}')
 
     # prepare data
     print("preparing data")

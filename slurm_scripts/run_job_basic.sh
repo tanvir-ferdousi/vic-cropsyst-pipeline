@@ -8,5 +8,6 @@
 echo Running on `hostname`
 
 module load anaconda
+source activate vic_pipeline
 
-python main/sim_run/sim_runner_basic.py
+python ../main/sim_run/sim_runner_basic.py
