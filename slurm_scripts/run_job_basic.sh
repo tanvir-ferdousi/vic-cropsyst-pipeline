@@ -13,4 +13,4 @@ source activate vic_pipeline
 conda list
 python --version
 
-# python main/sim_run/sim_runner_basic.py
+python main/sim_run/sim_runner_basic.py
