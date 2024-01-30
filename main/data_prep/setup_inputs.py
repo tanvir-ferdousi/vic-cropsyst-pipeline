@@ -253,9 +253,9 @@ def main():
     # watershed_data_file = 'data/VIC_gridcode_latlong_area_watershed.csv'
 
     soil_file_in = '/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC-CropSyst/Simulation/Database/Soil/all_calibrated_plus_uncalibrated_soil_210106.txt'
-    soil_dir_out = 'input_files/dynamic/basic_run/SoilSplits/'
-
     control_file_in = 'input_files/static/vic_control.txt'
+    
+    soil_dir_out = 'input_files/dynamic/basic_run/SoilSplits/'
     control_dir_out = 'input_files/dynamic/basic_run/SimSplits/'
 
     # forcing_dir = '/scratch/jcr5wj/agaid/forcing/input_data_mod/' + 'run' + str(run_id) + '/data_'
