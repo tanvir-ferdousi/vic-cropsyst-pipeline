@@ -9,7 +9,6 @@ sys.path.insert(0, par_dir)
 from lib.dataprocessing import readFile
 
 SLEEP_TIME_SECONDS = 100
-WORK_DIR = '/scratch/jcr5wj/agaid/vic-cropsyst-pipeline/'
 
 RUN_SUFFIX = 'w4_jan_24'
 RESULT_DIR_PREFIX = '/scratch/jcr5wj/agaid/test_results/'+RUN_SUFFIX+'/'
@@ -44,11 +43,11 @@ def run_hydro_sim(coord_list_file, split_size, n_segments):
 
 
     # result_dir = RESULT_DIR_PREFIX
-    print(f'In sim_runner_basic.py. CWD: {os.getcwd()}')
+    # print(f'In sim_runner_basic.py. CWD: {os.getcwd()}')
 
     # prepare data
     print("preparing data")
-    python_script = WORK_DIR + 'main/data_prep/setup_inputs.py'
+    python_script = 'main/data_prep/setup_inputs.py'
     status = subprocess.run(['python', python_script, '--coordListFile', coord_list_file, '--splitSize', str(split_size), '--resultDir', RESULT_DIR_PREFIX], stdout=subprocess.PIPE).stdout.decode("utf-8")
     print("Setup input stdout: " + status)
 
@@ -73,7 +72,7 @@ def run_hydro_sim(coord_list_file, split_size, n_segments):
 
 def main():
 
-    coord_list_file = 'input_files/static/coord_list_small_test.txt'
+    coord_list_file = os.getcwd()+'/input_files/static/coord_list_small_test.txt'
     split_size = 5
 
     target_coords = readFile(coord_list_file)

@@ -244,12 +244,10 @@ def main():
     coord_list_file = args.coordListFile
     result_dir = args.resultDir
 
-    # run_id = args.runId
-    print(f'In setup_inputs.py. CWD: {os.getcwd()}')
+
+    # print(f'In setup_inputs.py. CWD: {os.getcwd()}')
 
     print(f'Split size: {split_size}')
-    # print(f'Run id: {run_id}')
-    print
 
     forcing_list_path = 'input_files/static/forcing_file_list.txt'
     # watershed_data_file = 'data/VIC_gridcode_latlong_area_watershed.csv'
@@ -263,8 +261,6 @@ def main():
     # forcing_dir = '/scratch/jcr5wj/agaid/forcing/input_data_mod/' + 'run' + str(run_id) + '/data_'
     forcing_dir = '/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC_Binary_CONUS_1979_to_2019_20200721/data_'
 
-    # watershed_list = readFile(watershed_list_file)
-    # target_coords = getMultiWsCoords(watershed_data_file, watershed_list)
     target_coords = readFile(coord_list_file)
     forcing_coords = getForcingCoords(forcing_list_path)
 
