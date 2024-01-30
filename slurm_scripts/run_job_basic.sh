@@ -5,6 +5,9 @@
 #SBATCH --account=nssac_agaid
 #SBATCH --partition=bii
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+#SBATCH --chdir=$SCRIPT_DIR
+
 echo Running on `hostname`
 
 module load anaconda
