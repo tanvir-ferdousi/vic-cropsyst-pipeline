@@ -7,6 +7,7 @@
 
 echo Running on `hostname`
 
+module load anaconda
 DIR=~/.conda/envs/vic_pipeline
 source activate vic_pipeline
 export PATH=$DIR/bin:$PATH
