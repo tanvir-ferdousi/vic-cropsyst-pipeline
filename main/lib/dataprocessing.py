@@ -1,4 +1,4 @@
-import geopandas as gpd
+# import geopandas as gpd
 from pathlib import Path
 
 def readFile(file_path):
@@ -16,16 +16,16 @@ def readFile(file_path):
 
     return file_data
 
-def getMultiWsData(file_path, watershed_list):
-    all_watershed_df = gpd.read_file(file_path)
-    watershed_df = all_watershed_df[all_watershed_df['watershed'].isin(watershed_list)]
-    return watershed_df
-
-def getMultiWsCoords(file_path, watershed_list):
-    all_watershed_df = gpd.read_file(file_path)
-    watershed_df = all_watershed_df[all_watershed_df['watershed'].isin(watershed_list)]
-    watershed_coords = watershed_df.Latitude.values + '_' +  watershed_df.Longitude.values
-    return watershed_coords
+# def getMultiWsData(file_path, watershed_list):
+#     all_watershed_df = gpd.read_file(file_path)
+#     watershed_df = all_watershed_df[all_watershed_df['watershed'].isin(watershed_list)]
+#     return watershed_df
+#
+# def getMultiWsCoords(file_path, watershed_list):
+#     all_watershed_df = gpd.read_file(file_path)
+#     watershed_df = all_watershed_df[all_watershed_df['watershed'].isin(watershed_list)]
+#     watershed_coords = watershed_df.Latitude.values + '_' +  watershed_df.Longitude.values
+#     return watershed_coords
 
 def removePrefix(text, prefix):
 
