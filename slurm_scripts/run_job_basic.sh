@@ -7,7 +7,7 @@
 
 echo Running on `hostname`
 
-module load anaconda
+module load anaconda/2023.07-py3.11
 source activate vic_pipeline
 
 python main/sim_run/sim_runner_basic.py
