@@ -73,7 +73,7 @@ def run_hydro_sim(coord_list_file, split_size, n_segments):
 
 def main():
 
-    coord_list_file = '../input_files/static/coord_list_small_test.txt'
+    coord_list_file = 'input_files/static/coord_list_small_test.txt'
     split_size = 5
 
     target_coords = readFile(coord_list_file)

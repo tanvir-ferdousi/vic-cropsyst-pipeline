@@ -251,14 +251,14 @@ def main():
     # print(f'Run id: {run_id}')
     print
 
-    forcing_list_path = '../../input_files/static/forcing_file_list.txt'
+    forcing_list_path = 'input_files/static/forcing_file_list.txt'
     # watershed_data_file = 'data/VIC_gridcode_latlong_area_watershed.csv'
 
     soil_file_in = '/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC-CropSyst/Simulation/Database/Soil/all_calibrated_plus_uncalibrated_soil_210106.txt'
-    soil_dir_out = '../../input_files/dynamic/basic_run/SoilSplits'
+    soil_dir_out = 'input_files/dynamic/basic_run/SoilSplits'
 
-    control_file_in = '../../input_files/static/vic_control.txt'
-    control_dir_out = '../../input_files/dynamic/basic_run/SimSplits'
+    control_file_in = 'input_files/static/vic_control.txt'
+    control_dir_out = 'input_files/dynamic/basic_run/SimSplits'
 
     # forcing_dir = '/scratch/jcr5wj/agaid/forcing/input_data_mod/' + 'run' + str(run_id) + '/data_'
     forcing_dir = '/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC_Binary_CONUS_1979_to_2019_20200721/data_'
