@@ -6,11 +6,12 @@
 #SBATCH --partition=bii
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-#SBATCH --chdir=$SCRIPT_DIR
+WORK_DIR=$SCRIPT_DIR/..
+cd "$WORK_DIR"
 
 echo Running on `hostname`
 
 module load anaconda
 source activate vic_pipeline
 
-python ../main/sim_run/sim_runner_basic.py
+python main/sim_run/sim_runner_basic.py
