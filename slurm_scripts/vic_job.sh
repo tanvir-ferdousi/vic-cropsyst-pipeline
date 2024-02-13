@@ -8,4 +8,4 @@
 
 echo Running on `hostname`
 
-~/dev/VIC_CropSyst/build/gcc/Release/VIC_CropSyst -g ../input_files/dynamic/basic_run/vic_control_segment_${SLURM_ARRAY_TASK_ID}.txt
+~/dev/VIC_CropSyst/build/gcc/Release/VIC_CropSyst -g input_files/dynamic/basic_run/vic_control_segment_${SLURM_ARRAY_TASK_ID}.txt
