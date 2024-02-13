@@ -1,3 +1,0 @@
-#!/bin/bash
-
-sbatch slurm_scripts/run_job_basic.sh

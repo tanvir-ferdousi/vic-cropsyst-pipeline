@@ -2,7 +2,7 @@
 #SBATCH --ntasks=1
 #SBATCH --time=01:00:00
 #SBATCH --mem-per-cpu=4096
-#SBATCH --output=../log/result_%A_%a.out
+#SBATCH --output=log/result_%A_%a.out
 #SBATCH --account=nssac_agaid
 #SBATCH --partition=bii
 
