@@ -55,7 +55,7 @@ def run_hydro_sim(coord_list_file, split_size, n_segments):
     # submit job
     print("Submitting job")
     arry_arg = '--array=0-' + str(n_segments-1)
-    slurm_script = os.getcwd() + 'slurm_scripts/vic_job_basic.sh'
+    slurm_script = os.getcwd() + '/slurm_scripts/vic_job_basic.sh'
     status = subprocess.run(['sbatch', arry_arg, slurm_script], stdout=subprocess.PIPE).stdout.decode("utf-8")
     print(status)
     ACTIVE_JOB_ID_LIST.append(status.split()[-1])
