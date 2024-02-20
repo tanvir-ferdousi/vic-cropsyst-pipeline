@@ -3,6 +3,7 @@ from sys import exit
 import os, shutil, sys, inspect
 import geopandas as gpd
 import argparse
+import configparser
 
 cur_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 par_dir = os.path.dirname(cur_dir)
@@ -21,8 +22,6 @@ def readClas():
     parser.add_argument('--runId', type=int, dest='runId', required=False)
     parser.add_argument('--coordListFile', type=str, dest='coordListFile', required=True)
     parser.add_argument('--resultDir', type=str, dest='resultDir', required=True)
-
-
 
     args = parser.parse_args()
 
@@ -244,22 +243,26 @@ def main():
     coord_list_file = args.coordListFile
     result_dir = args.resultDir
 
-
-    # print(f'In setup_inputs.py. CWD: {os.getcwd()}')
+    config = configparser.ConfigParser()
+    config.read('config.ini')
 
     print(f'Split size: {split_size}')
 
-    forcing_list_path = 'input_files/static/forcing_file_list.txt'
+    forcing_list_path = config['input']['forcing_file_list']
+    # forcing_list_path = 'input_files/static/forcing_file_list.txt'
     # watershed_data_file = 'data/VIC_gridcode_latlong_area_watershed.csv'
 
-    soil_file_in = '/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC-CropSyst/Simulation/Database/Soil/all_calibrated_plus_uncalibrated_soil_210106.txt'
-    control_file_in = 'input_files/static/vic_control.txt'
-    
+    soil_file_in = config['input']['soil_file']
+    control_file_in = config['input']['control_file']
+    # soil_file_in = '/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC-CropSyst/Simulation/Database/Soil/all_calibrated_plus_uncalibrated_soil_210106.txt'
+    # control_file_in = 'input_files/static/vic_control.txt'
+
     soil_dir_out = 'input_files/dynamic/basic_run/SoilSplits/'
     control_dir_out = 'input_files/dynamic/basic_run/SimSplits/'
 
+    forcing_dir = config['input']['forcing_dir_with_prefix']
     # forcing_dir = '/scratch/jcr5wj/agaid/forcing/input_data_mod/' + 'run' + str(run_id) + '/data_'
-    forcing_dir = '/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC_Binary_CONUS_1979_to_2019_20200721/data_'
+    # forcing_dir = '/project/nssac_agaid/vic_cropsyst/data/ForVirginia/for_run_VIC_CropSyst/VIC_Binary_CONUS_1979_to_2019_20200721/data_'
 
     target_coords = readFile(coord_list_file)
     forcing_coords = getForcingCoords(forcing_list_path)
