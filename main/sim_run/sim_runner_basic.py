@@ -2,17 +2,17 @@ import subprocess
 import time
 from pathlib import Path
 import os, sys, shutil, inspect
+import configparser
 
-# from .context import lib
 cur_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 par_dir = os.path.dirname(cur_dir)
 sys.path.insert(0, par_dir)
 from lib.dataprocessing import readFile
 
-SLEEP_TIME_SECONDS = 100
+# SLEEP_TIME_SECONDS = 100
 
-RUN_SUFFIX = 'w4_jan_24'
-RESULT_DIR_PREFIX = '/scratch/jcr5wj/agaid/test_results/'+RUN_SUFFIX+'/'
+# RUN_SUFFIX = 'w4_jan_24'
+# RESULT_DIR_PREFIX = '/scratch/jcr5wj/agaid/test_results/'+RUN_SUFFIX+'/'
 
 def checkMakeAndClearDir(dir_path, clear_dir):
     if not Path(dir_path).is_dir():
@@ -38,7 +38,7 @@ def clearDir(dir_path):
         except Exception as e:
             print(f'Failed to delete {file_path}. Reason: {e}')
 
-def run_hydro_sim(coord_list_file, split_size, n_segments):
+def run_hydro_sim(computing_id, coord_list_file, split_size, n_segments, slurm_query_interval, result_dir):
 
     ACTIVE_JOB_ID_LIST = []
 
@@ -49,7 +49,7 @@ def run_hydro_sim(coord_list_file, split_size, n_segments):
     # prepare data
     print("preparing data")
     python_script = 'main/data_prep/setup_inputs.py'
-    status = subprocess.run(['python', python_script, '--coordListFile', coord_list_file, '--splitSize', str(split_size), '--resultDir', RESULT_DIR_PREFIX], stdout=subprocess.PIPE).stdout.decode("utf-8")
+    status = subprocess.run(['python', python_script, '--coordListFile', coord_list_file, '--splitSize', str(split_size), '--resultDir', result_dir], stdout=subprocess.PIPE).stdout.decode("utf-8")
     print("Setup input stdout: " + status)
 
     # submit job
@@ -62,11 +62,11 @@ def run_hydro_sim(coord_list_file, split_size, n_segments):
 
     # wait for finish
     print("Checking for job status")
-    status = subprocess.run(['squeue', '-u', 'jcr5wj'], stdout=subprocess.PIPE).stdout.decode("utf-8")
+    status = subprocess.run(['squeue', '-u', computing_id], stdout=subprocess.PIPE).stdout.decode("utf-8")
     while any(job_id in status for job_id in ACTIVE_JOB_ID_LIST):
-        print("Waiting for " + str(SLEEP_TIME_SECONDS) + " seconds.")
-        time.sleep(SLEEP_TIME_SECONDS)
-        status = subprocess.run(['squeue', '-u', 'jcr5wj'], stdout=subprocess.PIPE).stdout.decode("utf-8")
+        print("Waiting for " + str(slurm_query_interval) + " seconds.")
+        time.sleep(slurm_query_interval)
+        status = subprocess.run(['squeue', '-u', computing_id], stdout=subprocess.PIPE).stdout.decode("utf-8")
         print("status: " + status)
 
     print("All jobs finished")
@@ -74,13 +74,23 @@ def run_hydro_sim(coord_list_file, split_size, n_segments):
 
 def main():
 
-    coord_list_file = os.getcwd()+'/input_files/static/coord_list_small_test.txt'
-    split_size = 5
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+
+    # coord_list_file = os.getcwd()+'/input_files/static/coord_list_small_test.txt'
+    computing_id = config['user']['computing_id']
+
+    coord_list_file = os.getcwd() + config['input']['cell_coord_list']
+    result_dir = config['output']['result_dir']
+
+    split_size = int(config['simulation']['split_size'])
+    slurm_query_interval = int(config['simulation']['slurm_query_interval'])
+
 
     target_coords = readFile(coord_list_file)
     n_segments = len(range(0, len(target_coords), split_size))
 
-    run_hydro_sim(coord_list_file, split_size, n_segments)
+    run_hydro_sim(computing_id, coord_list_file, split_size, n_segments, slurm_query_interval, result_dir)
 
 if __name__ == '__main__':
     main()
