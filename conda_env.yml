@@ -1,0 +1,8 @@
+name: vic_pipeline
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - geopandas
